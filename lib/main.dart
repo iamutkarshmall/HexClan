@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hexclan_user/screens/mainscreen.dart';
-import 'package:hexclan_user/screens/loginscreen.dart';
+import 'package:hexclan_user/AllScreens/mainscreen.dart';
+import 'package:hexclan_user/AllScreens/loginscreen.dart';
 
 void main() {
   runApp(MyApp());
