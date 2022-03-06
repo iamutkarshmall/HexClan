@@ -118,7 +118,7 @@ class RegistrationScreen extends StatelessWidget {
                         borderRadius: new BorderRadius.circular(24.0),
                       ),
                       onPressed: () {
-                        registerNewUser(context);
+                        // registerNewUser(context);
                       },
                     )
                   ],
@@ -140,13 +140,16 @@ class RegistrationScreen extends StatelessWidget {
     );
   }
 
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  void registerNewUser(BuildContext context) async {
-    final FirebaseUser firebaseUser =
-        (await _firebaseAuth.createUserWithEmailAndPassword(
-            email: emailTextEditingController.text,
-            password: passwordTextEditingController.text)) as FirebaseUser;
-  }
+  // final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  // registerNewUser(BuildContext context) async {
+  //   final FirebaseUser firebaseUser = (await _firebaseAuth
+  //   .createUserWithEmailAndPassword(
+  //     email: emailTextEditingController.text,
+  //     password: passwordTextEditingController.text)).user;
+  // }
+
+  
+
 
   // if(firebaseUser != null) //user created
   // {
