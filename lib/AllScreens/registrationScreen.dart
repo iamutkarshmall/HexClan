@@ -1,8 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:hexclan_user/AllScreens/registrationScreen.dart';
+import 'package:hexclan_user/AllScreens/loginScreen.dart';
 
-class LoginScreen extends StatelessWidget {
-  static const String idScreen = "login";
+class RegistrationScreen extends StatelessWidget {
+  static const String idScreen = "register";
+  TextEditingController nameTextEditingController = TextEditingController();
+  TextEditingController emailTextEditingController = TextEditingController();
+  TextEditingController phoneTextEditingController = TextEditingController();
+  TextEditingController passwordTextEditingController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +30,7 @@ class LoginScreen extends StatelessWidget {
                 height: 1.0,
               ),
               Text(
-                "Login as a User",
+                "Register as a User",
                 style: TextStyle(fontSize: 24.0, fontFamily: "Brand Bold"),
                 textAlign: TextAlign.center,
               ),
@@ -37,6 +42,22 @@ class LoginScreen extends StatelessWidget {
                       height: 1.0,
                     ),
                     TextField(
+                      controller: nameTextEditingController,
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                        labelText: "Name",
+                        labelStyle: TextStyle(
+                          fontSize: 14.0,
+                          color: Colors.grey,
+                        ),
+                      ),
+                      style: TextStyle(fontSize: 14.0),
+                    ),
+                    SizedBox(
+                      height: 1.0,
+                    ),
+                    TextField(
+                      controller: emailTextEditingController,
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                         labelText: "Email",
@@ -51,6 +72,22 @@ class LoginScreen extends StatelessWidget {
                       height: 1.0,
                     ),
                     TextField(
+                      controller: phoneTextEditingController,
+                      keyboardType: TextInputType.phone,
+                      decoration: InputDecoration(
+                        labelText: "Phone",
+                        labelStyle: TextStyle(
+                          fontSize: 14.0,
+                          color: Colors.grey,
+                        ),
+                      ),
+                      style: TextStyle(fontSize: 14.0),
+                    ),
+                    SizedBox(
+                      height: 1.0,
+                    ),
+                    TextField(
+                      controller: passwordTextEditingController,
                       obscureText: true,
                       decoration: InputDecoration(
                         labelText: "Password",
@@ -71,7 +108,7 @@ class LoginScreen extends StatelessWidget {
                         height: 50.0,
                         child: Center(
                           child: Text(
-                            "Login",
+                            "Create Account",
                             style: TextStyle(
                                 fontSize: 18.0, fontFamily: "Brand Bold"),
                           ),
@@ -81,7 +118,7 @@ class LoginScreen extends StatelessWidget {
                         borderRadius: new BorderRadius.circular(24.0),
                       ),
                       onPressed: () {
-                        print("loggedin button clicked");
+                        registerNewUser(context);
                       },
                     )
                   ],
@@ -90,10 +127,10 @@ class LoginScreen extends StatelessWidget {
               FlatButton(
                 onPressed: () {
                   Navigator.pushNamedAndRemoveUntil(
-                      context, RegistrationScreen.idScreen, (route) => false);
+                      context, LoginScreen.idScreen, (route) => false);
                 },
                 child: Text(
-                  "Do not have a account? Register here.",
+                  "Already have an account? Login",
                 ),
               )
             ],
@@ -102,4 +139,22 @@ class LoginScreen extends StatelessWidget {
       ),
     );
   }
+
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  void registerNewUser(BuildContext context) async {
+    final FirebaseUser firebaseUser =
+        (await _firebaseAuth.createUserWithEmailAndPassword(
+            email: emailTextEditingController.text,
+            password: passwordTextEditingController.text)) as FirebaseUser;
+  }
+
+  // if(firebaseUser != null) //user created
+  // {
+  //   //save user info to database
+  // }
+  // else //user not created
+  // {
+  //   //show error message
+  // }
+
 }

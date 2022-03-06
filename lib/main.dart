@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hexclan_user/AllScreens/mainscreen.dart';
-import 'package:hexclan_user/AllScreens/loginscreen.dart';
+import 'package:hexclan_user/AllScreens/mainScreen.dart';
+import 'package:hexclan_user/AllScreens/loginScreen.dart';
+import 'package:hexclan_user/AllScreens/registrationScreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,7 +18,12 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: LoginScreen(),
+      initialRoute: LoginScreen.idScreen,
+      routes: {
+        RegistrationScreen.idScreen: (context) => RegistrationScreen(),
+        LoginScreen.idScreen: (context) => LoginScreen(),
+        MainScreen.idScreen: (context) => MainScreen(),
+      },
       debugShowCheckedModeBanner: false,
     );
   }
